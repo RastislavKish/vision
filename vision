@@ -14,6 +14,8 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 
+from os import path
+
 import base64
 import click
 import requests
@@ -62,14 +64,7 @@ class ImageMessage:
             "type": "text",
             "text": self._text,
             }]
-
-        for image in self._images:
-            content.append({
-                "type": "image_url",
-                "image_url": {
-                    "url": f"data:image/jpeg;base64,{image}",
-                    },
-                })
+        content+=[image.render() for image in self._images]
 
         result={
             "role": "user",
@@ -91,6 +86,43 @@ class GptResponse:
             "content": [
                 {"type": "text", "text": self._text}
                 ],
+            }
+
+class Image:
+
+    def from_input(input):
+        if path.exists(input) and path.isfile(input):
+            with open(input, "rb") as f:
+                image=f.read()
+                image=base64.b64encode(image).decode("utf-8")
+                return LocalImage(image)
+        if input.startswith("http"):
+            return RemoteImage(input)
+class LocalImage(Image):
+
+    def __init__(self, image):
+        super().__init__()
+        self._image=image
+
+    def render(self):
+        return {
+            "type": "image_url",
+            "image_url": {
+                "url": f"data:image/jpeg;base64,{self._image}",
+                },
+            }
+class RemoteImage:
+
+    def __init__(self, url):
+        super().__init__()
+        self._url=url
+
+    def render(self):
+        return {
+            "type": "image_url",
+            "image_url": {
+                "url": self._url,
+                },
             }
 
 class Conversation:
@@ -147,11 +179,20 @@ class Conversation:
 @click.option("-a", "--api-key", envvar="OPENAI_API_KEY", help="The OpenAI api key")
 @click.option("-s", "--system-prompt", default="", help="The system prompt to use")
 @click.option("-u", "--user-prompt", default="What's in the image?", help="The first user prompt to use if images are passed")
-@click.argument("images", type=click.File("rb"), nargs=-1)
+@click.argument("images", nargs=-1)
 def main(api_key, system_prompt, user_prompt, images):
     """A simple program that opens a conversation about image with GPT 4v"""
 
-    images=[base64.b64encode(image.read()).decode("utf-8") for image in images]
+    loaded_images=[]
+    for inp in images:
+        image=Image.from_input(inp)
+
+        if image==None:
+            print(f"Error: Unable to process {input}")
+            return
+
+        loaded_images.append(image)
+    images=loaded_images
 
     conversation=Conversation(api_key, "gpt-4-vision-preview", SystemMessage(system_prompt) if system_prompt!="" else None)
 
