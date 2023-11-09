@@ -16,6 +16,14 @@ Though most of the time, you can simply go with:
 vision image.jpg
 ```
 
+URLs are also supported:
+
+```
+vision https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/121px-Python-logo-notext.svg.png
+```
+
+Note only jpg, png, gif and webp formats are supported, leaving out svg, which is also very common. You may want to check the url's extension (if it's present) before sending.
+
 "What's in the image?" is used as the default user prompt, which should fit the most general use-case of getting the description of a selected image.
 
 After the image/s are described, you can interactively ask follow up questions about details and whatever you can think of, or simply use the program like you would interact with GPT 4 (GPT 4V is actually a full-fledged version of GPT 4, thus you can expect the same level of skills and capabilities).
