@@ -43,7 +43,11 @@ on Linux or:
 pip install click requests
 ```
 
-On Windows. Note you may need to create a virtual environment in some of the newer Linux distributions as packaged Python environments are getting preferred and the project doesn't have a package yet, this should be addressed soon.
+On Windows. Note you may need to create a virtual environment in some of the newer Linux distributions as packaged Python environments are getting preferred and the project doesn't have a package yet, this should be addressed soon. Or, alternatively, you can make use of your distribution-packaged Python libraries, which are less flexible but easier to setup:
+
+```
+sudo apt install python3-click python3-requests
+```
 
 ### Get the OpenAI api key
 
