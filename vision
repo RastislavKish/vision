@@ -153,7 +153,7 @@ def main(api_key, system_prompt, user_prompt, images):
 
     images=[base64.b64encode(image.read()).decode("utf-8") for image in images]
 
-    conversation=Conversation(api_key, "gpt-4-vision-preview", system_prompt if system_prompt!="" else None)
+    conversation=Conversation(api_key, "gpt-4-vision-preview", SystemMessage(system_prompt) if system_prompt!="" else None)
 
     if len(images)>0:
         message=ImageMessage(user_prompt, images)
