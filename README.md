@@ -59,7 +59,7 @@ sudo apt install python3-click python3-requests
 
 ### Get the OpenAI api key
 
-Visit [platform.openai.com](platform.openai.com) to optain the API key for accessing OpenAI models. You can sign up using your ChatGPT account if you already have one, you need to add a billing method (using your debet card), load credit into your account and generate the API key.
+Visit [platform.openai.com](https://platform.openai.com) to optain the API key for accessing OpenAI models. You can sign up using your ChatGPT account if you already have one, you need to add a billing method (using your debet card), load credit into your account and generate the API key.
 
 You can either create OPENAI_API_KEY environment variable in your system to provide the key to vision, or pass it directly to the program through a flag (though this approach is not recommended).
 
