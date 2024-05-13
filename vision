@@ -173,7 +173,7 @@ class Conversation:
         return None
 
     def total_price(self):
-        return 0.01*(self._total_used_input_tokens/1000)+0.03*(self._total_used_output_tokens/1000)
+        return 0.005*(self._total_used_input_tokens/1000)+0.015*(self._total_used_output_tokens/1000)
 
 @click.command()
 @click.option("-a", "--api-key", envvar="OPENAI_API_KEY", help="The OpenAI api key")
@@ -181,7 +181,7 @@ class Conversation:
 @click.option("-u", "--user-prompt", default="What's in the image?", help="The first user prompt to use if images are passed")
 @click.argument("images", nargs=-1)
 def main(api_key, system_prompt, user_prompt, images):
-    """A simple program that opens a conversation about image with GPT 4v"""
+    """A simple program that opens a conversation about image with GPT 4o"""
 
     loaded_images=[]
     for inp in images:
@@ -194,7 +194,7 @@ def main(api_key, system_prompt, user_prompt, images):
         loaded_images.append(image)
     images=loaded_images
 
-    conversation=Conversation(api_key, "gpt-4-vision-preview", SystemMessage(system_prompt) if system_prompt!="" else None)
+    conversation=Conversation(api_key, "gpt-4o", SystemMessage(system_prompt) if system_prompt!="" else None)
 
     if len(images)>0:
         message=ImageMessage(user_prompt, images)
