@@ -171,7 +171,7 @@ class Conversation:
         return None
 
     def total_price(self):
-        return 0.005*(self._total_used_input_tokens/1000)+0.015*(self._total_used_output_tokens/1000)
+        return 0.0025*(self._total_used_input_tokens/1000)+0.01*(self._total_used_output_tokens/1000)
 
 @click.command()
 @click.option("-a", "--api-key", envvar="OPENAI_API_KEY", help="The OpenAI api key")
