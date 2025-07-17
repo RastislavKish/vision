@@ -38,49 +38,27 @@ Also note these prices are approximations and can change in the future. Make sur
 
 ## Setup
 
-### Dependencies
-
-The script is crossplatform, it needs Python to run, dependencywise, it requires click and requests Python packages. Run
-
-```
-pip3 install click requests
-```
-
-on Linux or:
-```
-pip install click requests
-```
-
-On Windows. Note you may need to create a virtual environment in some of the newer Linux distributions as packaged Python environments are getting preferred and the project doesn't have a package yet, this should be addressed soon. Or, alternatively, you can make use of your distribution-packaged Python libraries, which are less flexible but easier to setup:
-
-```
-sudo apt install python3-click python3-requests
-```
-
 ### Get the OpenAI api key
 
 Visit [platform.openai.com](https://platform.openai.com) to optain the API key for accessing OpenAI models. You can sign up using your ChatGPT account if you already have one, you need to add a billing method (using your debet card), load credit into your account and generate the API key.
 
 You can either create OPENAI_API_KEY environment variable in your system to provide the key to vision, or pass it directly to the program through a flag (though this approach is not recommended).
 
-### Running
+### Run and install
 
-On Linux, you can add execute permissions if necessary:
+The script is cross-platform, it uses the [uv](https://github.com/astral-sh/uv) project manager.
 
-```
-chmod +x vision
-```
-
-And run like any program:
-
-```
-./vision
+```sh
+git clone https://github.com/RastislavKish/vision
+cd vision
+uv run vision
 ```
 
-On Windows, you can run the program using python:
+You can build it and install via pipx (replace `<version>` with your project version):
 
-```
-python vision
+```sh
+uv build
+pipx install dist/vision-<version>-py3-none-any.whl
 ```
 
 ## License
