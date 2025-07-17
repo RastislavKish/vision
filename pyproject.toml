@@ -1,0 +1,30 @@
+[project]
+
+name = "vision"
+version = "0.1.1"
+description = " A simple script for interaction with gpt-4o vision"
+authors = [
+    { name = "RastislavKish", email = "rastislav.kish@protonmail.com" }
+]
+license="GPL-3.0-only"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "click>=8.2.1",
+    "requests>=2.32.4",
+]
+
+[project.urls]
+
+Homepage = "https://github.com/RastislavKish/vision"
+Repository = "https://github.com/RastislavKish/vision.git"
+
+[project.scripts]
+
+vision = "vision.main:main"
+
+[build-system]
+
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+

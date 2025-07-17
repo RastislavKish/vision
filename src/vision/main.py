@@ -1,5 +1,3 @@
-#!/usr/bin/python3
-
 # Copyright (C) 2023 Rastislav Kish
 #
 # This program is free software: you can redistribute it and/or modify
@@ -218,4 +216,5 @@ def main(api_key, system_prompt, user_prompt, images):
 
     print(f"Conversation price: {conversation.total_price()}")
 
-main()
+if __name__=="__main__":
+		main()
